@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "author": "The Bin - Hack Club",
+  "editor": "wokwi",
+  "parts": [
+    {
+      "type": "board-pi-pico-w",
+      "id": "pico",
+      "top": 203.05,
+      "left": 162.35,
+      "rotate": 270,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-tm1637-7segment",
+      "id": "wokwi-tm1637-7segment-0",
+      "top": 316.76,
+      "left": -98.57,
+      "attrs": {}
+    },
+    { "type": "wokwi-pushbutton", "id": "wokwi-pushbutton-0", "top": 227, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-buzzer",
+      "id": "wokwi-buzzer-0",
+      "top": 333.3,
+      "left": 321.3,
+      "rotate": 90,
+      "attrs": {}
+    },
+    {
+      "type": "wokwi-max7219-matrix",
+      "id": "wokwi-max7219-matrix-0",
+      "top": 423,
+      "left": 205.41,
+      "attrs": {}
+    }
+  ],
+  "connections": [
+    [ "pico:GP0", "$serialMonitor:RX", "", [] ],
+    [ "pico:GP1", "$serialMonitor:TX", "", [] ],
+    [ "wokwi-tm1637-7segment-0:GND", "pico:GND.2", "black", [ "h0" ] ],
+    [ "wokwi-tm1637-7segment-0:CLK", "pico:GP2", "green", [ "h0" ] ],
+    [ "wokwi-tm1637-7segment-0:DIO", "pico:GP3", "green", [ "h0" ] ],
+    [ "wokwi-tm1637-7segment-0:VCC", "pico:VBUS", "red", [ "h19.2", "v-105.6", "h19.2" ] ],
+    [ "wokwi-pushbutton-0:1.r", "pico:GP16", "green", [ "v0", "h240.2" ] ],
+    [ "wokwi-pushbutton-0:2.r", "pico:VBUS", "red", [ "h0" ] ],
+    [ "wokwi-buzzer-0:1", "pico:GND.4", "black", [ "h0" ] ],
+    [ "wokwi-buzzer-0:2", "pico:GP15", "green", [ "h0" ] ]
+  ],
+  "dependencies": {}
+}
