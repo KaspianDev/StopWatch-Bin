@@ -36,8 +36,8 @@
     {
       "type": "wokwi-max7219-matrix",
       "id": "wokwi-max7219-matrix-0",
-      "top": 183,
-      "left": 320.61,
+      "top": 403.8,
+      "left": 90.21,
       "attrs": {}
     }
   ],
@@ -52,10 +52,11 @@
     [ "wokwi-pushbutton-0:2.r", "pico:VBUS", "red", [ "h0" ] ],
     [ "wokwi-buzzer-0:1", "pico:GND.4", "black", [ "h0" ] ],
     [ "wokwi-buzzer-0:2", "pico:GP15", "green", [ "h0" ] ],
-    [ "wokwi-max7219-matrix-0:GND.2", "pico:GND.5", "green", [ "h0" ] ],
-    [ "wokwi-max7219-matrix-0:V+.2", "pico:VBUS", "red", [ "v0", "h-207.41" ] ],
-    [ "wokwi-max7219-matrix-0:CLK.2", "pico:GP17", "green", [ "h0" ] ],
-    [ "wokwi-max7219-matrix-0:DOUT", "pico:GP18", "green", [ "h0" ] ]
+    [ "wokwi-max7219-matrix-0:V+", "pico:VBUS", "red", [ "h9.6", "v-163.2", "h-96" ] ],
+    [ "wokwi-max7219-matrix-0:DIN", "pico:GP12", "green", [ "h0" ] ],
+    [ "wokwi-max7219-matrix-0:CLK", "pico:GP11", "green", [ "h0" ] ],
+    [ "wokwi-max7219-matrix-0:CS", "pico:GP10", "green", [ "h0" ] ],
+    [ "wokwi-max7219-matrix-0:GND", "pico:GND.4", "black", [ "h0" ] ]
   ],
   "dependencies": {}
 }
