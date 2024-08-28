@@ -4,6 +4,7 @@ TM1637 display;
 int stopwatchTime = -1;
 
 const long DEBOUNCE_DELAY = 150;
+const int BUZZER_PIN = 5;
 const int START_PIN = 27;
 const int ALARM_PIN = 28;
 
@@ -13,7 +14,7 @@ void setup() {
 
   pinMode(START_PIN, INPUT); // Start/Stop Button
   pinMode(ALARM_PIN, INPUT); // Alarm Button
-  pinMode(15, OUTPUT); // Buzzer
+  pinMode(BUZZER_PIN, OUTPUT); // Buzzer
 
   incrementAlarm();
 }
@@ -58,7 +59,7 @@ void refreshTime() {
 void updateTime() {
   refreshTime();
 
-  if (alarmMinutes > -1 && minutes == alarmMinutes) {
+  if (alarmMinutes > -1 && minutes > 0 && minutes == alarmMinutes) {
     stopwatchTime = -1;
     shouldBlink = true;
   }
@@ -77,14 +78,15 @@ void loop() {
     lastOnOffState = onOffValue;
     if ((millis() - lastOnOffDebounce) > DEBOUNCE_DELAY) {
       if (stopwatchTime == -1) {
-        stopwatchTime = 55;
+        stopwatchTime = 0;
         shouldBlink = false;
-        tone(15, 180, 30);
+        tone(BUZZER_PIN, 180, 30);
       } else {
         stopwatchTime = 0;
         updateTime();
+        alarmMinutes = -2;
         stopwatchTime = -1;
-        tone(15, 160, 30);
+        tone(BUZZER_PIN, 160, 30);
       }
       lastOnOffDebounce = millis();
     }
@@ -96,11 +98,11 @@ void loop() {
     if (stopwatchTime == -1) {
       if ((millis() - lastAlarmDebounce) > DEBOUNCE_DELAY) {
         incrementAlarm();
-        tone(15, 170, 20);
+        tone(BUZZER_PIN, 170, 20);
         lastAlarmDebounce = millis();
       }
     } else {
-      tone(15, 220, 20);
+      tone(BUZZER_PIN, 220, 20);
     }
   }
 
@@ -108,11 +110,10 @@ void loop() {
     shouldBlink = false;
     for (int i = 0; i < 3; i++ ) {
       display.displayClear();
-      tone(15, 280, 30);
-      delay(470);
+      delay(330);
       display.displayTime(alarmMinutes, 00, true);
-      tone(15, 280, 30);
-      delay(470);
+      tone(BUZZER_PIN, 260, 30);
+      delay(300);
     }
     display.displayTime(00, 00, true);
     alarmMinutes = -2;
@@ -122,4 +123,3 @@ void loop() {
     count();
   }
 }
-
