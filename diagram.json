@@ -21,16 +21,16 @@
     {
       "type": "wokwi-pushbutton",
       "id": "wokwi-pushbutton-0",
-      "top": 169.4,
+      "top": 150.2,
       "left": 0,
-      "attrs": {}
+      "attrs": { "label": "Start/Stop" }
     },
     {
       "type": "wokwi-pushbutton",
       "id": "wokwi-pushbutton-1",
       "top": 217.4,
       "left": 0,
-      "attrs": {}
+      "attrs": { "label": "Alarm" }
     },
     {
       "type": "wokwi-buzzer",

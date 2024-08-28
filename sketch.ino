@@ -22,6 +22,7 @@ int alarmMinutes = -1;
 boolean shouldBlink = false;
 
 void incrementAlarm() {
+  if (alarmMinutes == -2) alarmMinutes += 2;
   alarmMinutes++;
   if (alarmMinutes > 59) {
     alarmMinutes = 0;
@@ -57,10 +58,9 @@ void refreshTime() {
 void updateTime() {
   refreshTime();
 
-  if (minutes == alarmMinutes) {
+  if (alarmMinutes > -1 && minutes == alarmMinutes) {
     stopwatchTime = -1;
     shouldBlink = true;
-    tone(15, 240, 50);
   }
 }
 
@@ -108,11 +108,14 @@ void loop() {
     shouldBlink = false;
     for (int i = 0; i < 3; i++ ) {
       display.displayClear();
-      delay(500);
+      tone(15, 280, 30);
+      delay(470);
       display.displayTime(alarmMinutes, 00, true);
-      delay(500);
+      tone(15, 280, 30);
+      delay(470);
     }
-    alarmMinutes = -1;
+    display.displayTime(00, 00, true);
+    alarmMinutes = -2;
   }
 
   if (stopwatchTime > -1) {
