@@ -1,7 +1,10 @@
+#include <MD_MAX72xx.h>
 #include "TM1637.h"
 
 TM1637 display;
 int stopwatchTime = -1;
+
+MD_MAX72XX led = MD_MAX72XX(MD_MAX72XX::PAROLA_HW, 10, 1);
 int hours = 0;
 
 void setup() {
@@ -11,6 +14,11 @@ void setup() {
 
   pinMode(16, INPUT); // Button
   pinMode(15, OUTPUT); // Buzzer
+  led.begin();
+  led.control(MD_MAX72XX::INTENSITY, 10);
+  led.clear();
+  led.setPoint(1, 1, true);
+  led.update();
 }
 
 void count() {
