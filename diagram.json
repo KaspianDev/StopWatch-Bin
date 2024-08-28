@@ -25,7 +25,13 @@
       "left": 0,
       "attrs": {}
     },
-    { "type": "wokwi-pushbutton", "id": "wokwi-pushbutton-1", "top": 227, "left": 0, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "wokwi-pushbutton-1",
+      "top": 217.4,
+      "left": 0,
+      "attrs": {}
+    },
     {
       "type": "wokwi-buzzer",
       "id": "wokwi-buzzer-0",

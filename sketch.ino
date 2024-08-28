@@ -9,7 +9,6 @@ const int ALARM_PIN = 28;
 
 void setup() {
   Serial1.begin(115200);
-  Serial1.println("Hello, Raspberry Pi Pico W!");
   display.begin(2, 3, 4);
 
   pinMode(START_PIN, INPUT); // Start/Stop Button
@@ -20,15 +19,20 @@ void setup() {
 }
 
 int alarmMinutes = -1;
+boolean shouldBlink = false;
 
 void incrementAlarm() {
   alarmMinutes++;
+  if (alarmMinutes > 59) {
+    alarmMinutes = 0;
+  }
+
   display.displayTime(alarmMinutes, 00, true);
 }
 
 int milis = 0;
 void count() {
-  if (milis < 999) {
+  if (milis < 1000) {
     milis++;
     return;
   }
@@ -38,14 +42,26 @@ void count() {
   updateTime();
 }
 
-void updateTime() {
-  int minutes = stopwatchTime / 60;
+int minutes = 0;
+
+void refreshTime() {
+  minutes = stopwatchTime / 60;
   if (minutes > 59) {
     stopwatchTime = 1;
   }
 
   int seconds = stopwatchTime % 60;
   display.displayTime(minutes, seconds, true);
+}
+
+void updateTime() {
+  refreshTime();
+
+  if (minutes == alarmMinutes) {
+    stopwatchTime = -1;
+    shouldBlink = true;
+    tone(15, 240, 50);
+  }
 }
 
 int lastOnOffState = 0;
@@ -61,7 +77,8 @@ void loop() {
     lastOnOffState = onOffValue;
     if ((millis() - lastOnOffDebounce) > DEBOUNCE_DELAY) {
       if (stopwatchTime == -1) {
-        stopwatchTime = 0;
+        stopwatchTime = 55;
+        shouldBlink = false;
         tone(15, 180, 30);
       } else {
         stopwatchTime = 0;
@@ -79,12 +96,23 @@ void loop() {
     if (stopwatchTime == -1) {
       if ((millis() - lastAlarmDebounce) > DEBOUNCE_DELAY) {
         incrementAlarm();
-        tone(15, 170, 15);
+        tone(15, 170, 20);
         lastAlarmDebounce = millis();
       }
     } else {
-      tone(15, 220, 15);
+      tone(15, 220, 20);
     }
+  }
+
+  if (shouldBlink) {
+    shouldBlink = false;
+    for (int i = 0; i < 3; i++ ) {
+      display.displayClear();
+      delay(500);
+      display.displayTime(alarmMinutes, 00, true);
+      delay(500);
+    }
+    alarmMinutes = -1;
   }
 
   if (stopwatchTime > -1) {
