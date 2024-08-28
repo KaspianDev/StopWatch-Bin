@@ -76,10 +76,14 @@ void loop() {
   int alarmState = digitalRead(ALARM_PIN);
   if (lastAlarmState != alarmState) {
     lastAlarmState = alarmState;
-    if ((millis() - lastAlarmDebounce) > DEBOUNCE_DELAY) {
-      incrementAlarm();
-      tone(15, 170, 10);
-      lastAlarmDebounce = millis();
+    if (stopwatchTime == -1) {
+      if ((millis() - lastAlarmDebounce) > DEBOUNCE_DELAY) {
+        incrementAlarm();
+        tone(15, 170, 15);
+        lastAlarmDebounce = millis();
+      }
+    } else {
+      tone(15, 220, 15);
     }
   }
 
