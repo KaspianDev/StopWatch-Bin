@@ -25,6 +25,7 @@
       "left": 0,
       "attrs": {}
     },
+    { "type": "wokwi-pushbutton", "id": "wokwi-pushbutton-1", "top": 227, "left": 0, "attrs": {} },
     {
       "type": "wokwi-buzzer",
       "id": "wokwi-buzzer-0",
@@ -32,13 +33,6 @@
       "left": 321.3,
       "rotate": 90,
       "attrs": { "volume": "0.05" }
-    },
-    {
-      "type": "wokwi-max7219-matrix",
-      "id": "wokwi-max7219-matrix-0",
-      "top": 403.8,
-      "left": 90.21,
-      "attrs": {}
     }
   ],
   "connections": [
@@ -48,15 +42,12 @@
     [ "wokwi-tm1637-7segment-0:CLK", "pico:GP2", "green", [ "h0" ] ],
     [ "wokwi-tm1637-7segment-0:DIO", "pico:GP3", "green", [ "h0" ] ],
     [ "wokwi-tm1637-7segment-0:VCC", "pico:VBUS", "red", [ "h19.2", "v-105.6", "h19.2" ] ],
-    [ "wokwi-pushbutton-0:1.r", "pico:GP16", "green", [ "v0", "h240.2" ] ],
     [ "wokwi-pushbutton-0:2.r", "pico:VBUS", "red", [ "h0" ] ],
     [ "wokwi-buzzer-0:1", "pico:GND.4", "black", [ "h0" ] ],
     [ "wokwi-buzzer-0:2", "pico:GP15", "green", [ "h0" ] ],
-    [ "wokwi-max7219-matrix-0:V+", "pico:VBUS", "red", [ "h9.6", "v-163.2", "h-96" ] ],
-    [ "wokwi-max7219-matrix-0:DIN", "pico:GP12", "green", [ "h0" ] ],
-    [ "wokwi-max7219-matrix-0:CLK", "pico:GP11", "green", [ "h0" ] ],
-    [ "wokwi-max7219-matrix-0:CS", "pico:GP10", "green", [ "h0" ] ],
-    [ "wokwi-max7219-matrix-0:GND", "pico:GND.4", "black", [ "h0" ] ]
+    [ "wokwi-pushbutton-1:1.r", "pico:GP28", "green", [ "v0", "h96.2" ] ],
+    [ "wokwi-pushbutton-0:1.r", "pico:GP27", "green", [ "v0", "h115.4" ] ],
+    [ "wokwi-pushbutton-1:2.r", "pico:VBUS", "red", [ "h0" ] ]
   ],
   "dependencies": {}
 }
